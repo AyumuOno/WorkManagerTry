@@ -50,6 +50,11 @@ android {
 }
 
 dependencies {
+    val timber = "com.jakewharton.timber:timber:4.7.1"
+    val worker = "androidx.work:work-runtime-ktx:2.9.0"
+
+    implementation(timber)
+    implementation(worker)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

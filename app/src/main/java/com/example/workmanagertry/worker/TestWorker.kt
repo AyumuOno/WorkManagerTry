@@ -1,15 +1,13 @@
-package com.example.workmanagertry.worker
-
-import com.example.workmanagertry.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.workmanagertry.R
+import timber.log.Timber
 
-class Worker(ctx: Context, params: WorkerParameters) : Worker(ctx, params) {
-
+class TestWorker(cxt: Context, params: WorkerParameters) : Worker(cxt, params) {
     val notificationManager =
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     // カテゴリー名（通知設定画面に表示される情報）
@@ -31,12 +29,13 @@ class Worker(ctx: Context, params: WorkerParameters) : Worker(ctx, params) {
     }
 
     override fun doWork(): Result {
-
+        Timber.tag("Woker test").d("start doWork")
+        val inputData = inputData.getString("message")
         repeat(10) {
 
-            val notification = NotificationCompat.Builder(applicationContext,id).apply {
+            val notification = NotificationCompat.Builder(applicationContext, id).apply {
 
-                setContentText("${it}回目のメッセージ")
+                setContentText("${it}回目のメッセージ  $inputData")
                 setSmallIcon(R.drawable.ic_launcher_background)
             }
 
